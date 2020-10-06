@@ -1,19 +1,404 @@
-## R Markdown
+## Question 1
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+The objective of Question 1 is to build familiarity with RStudio and basic R Markdown syntax.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+*Hint*: The "Pandoc's Markdown" section of the R Markdown Cheat Sheet may be useful for this question.
 
-```{r cars}
-summary(cars)
+### (a)
+
+Reproduce the following passage of text, including the italicized and bolded font.
+
+"**Sometimes you have to make the hardest climb to see the most beautiful sunrise.** I read that once on an old lady's decorative pillow, but it is really how I feel today. I've climbed a very weird and rocky mountain, and it was a pain in the ass, and my legs are tired, and I'm starving. But *the sun is rising over a sea of love and waffles and possibility.* So *I'm just gonna relax and take a deep breath and enjoy this view for as long as I possibly can.*" -- Leslie Knope (from ***Parks and Recreation***)
+
+
+### (b)
+
+Using R Markdown, recreate the folowing table. *You should not need R to create this table.*
+
+<!-- Your grade will be based on the following components: -->
+
+Homework | Midterm | Final Exam | Final Project
+-:|-:|-:|-:
+18% | 30% | 40% |12%
+
+**Note**: Tables knitted to HTML may look different from those knitted to PDF, so the formatting may vary. The idea is to get practice creating a table with specified columns and formatting (e.g., left-, center-, or right-justified).
+
+
+## (c)
+
+In a nested list, recount your UCLA class history to date (sorry seniors!), e.g.:
+
+* 2018
+  * Fall
+    * Stats 10
+    * Basket Weaving 33AH
+    * Physics 1: Women's Lasers
+  + Winter
+    * Advanced Parks and Recreation Seminar
+    * Foods 2: Carob Cookies and Berries
+    * Reading 0: The Alphabet
+  + etc...
+
+If you have not yet taken classes at UCLA (other than this one), include your most recent year's class history.
+
+**Note**: The bullet points do not need to be identical to those in the example. Nested lists knitted to HTML may look different from those knitted to PDF.
+
+
+### (d)
+
+Find a picture of a kitten (not this one) and include it in your document. Be sure to cite your source.
+
+![](images/){width=35%}
+
+<!-- \begin{center} -->
+<!-- \includegraphics[width=0.35\textwidth]{kitten2.jpg} -->
+<!-- \end{center} -->
+Sample kitten from: https://www.facebook.com/kittenxlady/posts/2190511374536140
+
+<!-- **Note**: Your image does not need to be centered. -->
+
+
+## Question 2
+
+Watch the following video: <https://youtu.be/cDA3_5982h8> \
+(For anyone who needs it, a transcript can be found here: <https://bit.ly/2Qw58xx>)
+
+### (a)
+
+What do you think is the relevance of this video to you in the context of this class? Explain as best you can.
+
+### (b)
+
+In a structured way, write detailed instructions to make a grilled cheese sandwich.
+
+
+## Question 3
+
+The objective of this question is to give practice with creating code chunks, calculator computation, and using basic functions.
+
+### (a)
+
+Use R to compute the following quantities. Include parentheses to clarify the order of operations.
+
+(i) $\dfrac{6^8}{16^5}$
+```{r, eval = FALSE, echo = FALSE}
+(6^8) / (16^5)
+```
+(ii) $101^{-\frac{8}{7}}$
+```{r, eval = FALSE, echo = FALSE}
+101^(-8 / 7)
+```
+(iii) $8 + 3 * \pi - 3 + 4 / 2 * -1$
+```{r, eval = FALSE, echo = FALSE}
+8 + 3 * pi - 3 + 4 / 2 * -1 # Original
+8 + (3 * pi) - 3 + ((4 / 2) * -1) # With correct parentheses
 ```
 
-## Including Plots
+### (b)
 
-You can also embed plots, for example:
+Use the built-in functions in R to compute the following quantities.
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+(i) $\log_2 54$
+
+```{r, eval = FALSE, echo = FALSE}
+log(54, base = 2)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+(ii) $e^{e^{\sqrt{2}}}$
+
+```{r, eval = FALSE, echo = FALSE}
+exp(exp(sqrt(2)))
+```
+
+(iii) $\dfrac{e^\pi + e^{-\pi}}{2}$
+
+```{r, eval = FALSE, echo = FALSE}
+(exp(pi) + exp(-pi)) / 2
+```
+
+### (c)
+
+(i) Find the number of times that 25 goes into 119.
+
+```{r, eval = FALSE, echo = FALSE}
+119 %/% 25
+```
+
+(ii) Find the remainder after dividing 119 by 25.
+
+```{r, eval = FALSE, echo = FALSE}
+119 %% 25
+```
+
+## Question 4
+
+The objective of this question is to give practice with object assignment and writing a function with one argument.
+
+Recall that the volume of a sphere of radius $r$ is $V = \dfrac{4}{3} \pi r^3$.
+
+### (a)
+
+(i) Find the volume of a sphere of radius $r = 1$. Store the output as an object called `vol_1`.
+
+```{r, eval = FALSE, echo = FALSE}
+vol_1 <- (4 / 3) * 1^3
+```
+
+(ii) Find the volume of a sphere of radius $r = 4$. Store the output as an object called `vol_4`.
+
+```{r, eval = FALSE, echo = FALSE}
+vol_4 <- (4 / 3) * 4^3
+```
+
+### (b)
+
+Write a function called `vol_sphere()` that inputs an argument `r` and outputs the volume of a sphere of radius `r`. Set the default of `r` to be 1.
+
+```{r, eval = FALSE, echo = FALSE}
+vol_sphere <- function(r = 1) {
+  (4 / 3) * pi * r^3
+}
+```
+
+### (c)
+
+(i) Verify that the command `vol_sphere()` (i.e., calling the function without changing the default argument) computes the same value as `vol_1`.
+
+```{r, eval = FALSE, echo = FALSE}
+vol_sphere()
+vol_1
+```
+
+(ii) Use the `vol_sphere()` function to compute the volume of a sphere of radius $4$, and verify that the result is the same value as `vol_4`.
+
+```{r, eval = FALSE, echo = FALSE}
+vol_sphere(r = 4)
+vol_4
+```
+
+**Note**: For those who have learned relational operators (which are not allowed on this assignment anyway), verification does not require logical comparison. For example, just show that the output of `vol_sphere()` appears to be the same value as `vol_1` when printed to the console (or knitted in a code chunk).
+
+
+## Question 5
+
+The objective of this question is to give practice with writing a function with several arguments and creating local objects.
+
+### (a)
+
+Write a function called `z_prop()` which calculates the $z$-statistic given the following values/arguments:
+
+> `x`:  the number of successes  
+> `n`:  the number of trials  
+> `p0`: the hypothesized population proportion
+
+*Hint*: As a reminder, the $z$-statistic is given by the formula
+\begin{align*}
+z &= \frac{\hat{p} - p_0}{\sqrt{\dfrac{p_0\left(1 - p_0\right)}{n}}},
+\end{align*}
+where $\hat{p}$ denotes the sample proportion. How is $\hat{p}$ related to the input arguments?
+
+```{r, echo = FALSE}
+z_prop <- function(x, n, p0) {
+  p_hat <- x / n
+  std_error <- sqrt((p0 * (1 - p0)) / n)
+  (p_hat - p0) / std_error
+}
+```
+
+### (b)
+
+Suppose that 60% of residents in the city of Pawnee, Indiana, prefer waffles over pancakes. Out of a sample of 13 Pawnee residents, 10 of them prefer waffles. Use your `z_prop()` function from (a) to calculate the $z$-statistic for this sample.
+
+*Hint*: The input argument `p0` is a proportion, *not* a percentage.
+
+```{r, include = FALSE, echo = FALSE}
+z_prop(x = 10, n = 13, p0 = 0.6)
+```
+
+### (c)
+
+Interpret the value of the $z$-statistic from (b) in the context of the data.
+
+*Hint*: This is a Stats 10/12/13 question.
+
+### (d)
+
+For the same population of Pawnee residents, another sample is observed. Out of a sample of 39 Pawnee residents, 30 of them prefer waffles. Use your `z_prop()` function from (a) to calculate the $z$-statistic for this sample. How/Why has your $z$-statistic changed?
+
+
+\newpage
+
+# Intermediate Questions
+
+**Collaboration on intermediate questions must adhere to \textcolor{red}{Level 1} collaboration described in the Stats 20 Collaboration Policy.**
+
+## Question 6
+
+The objective of this question is to give further practice with writing a function with several arguments and following instructions given in pseudocode.
+
+Read through the following pseudocode and answer the following questions:
+```
+FUNCTION: lease_calc
+INPUTS: msrp : the manufacturer's suggested retail price.
+        price: the sale price of the car in dollars.  
+        down:  the amount of the down payment on the car in dollars.
+        n:     the duration of the lease in months
+               default = 36.  
+        res:   the residual percentage, what the expected value of the car at the end of 
+               the lease relative to its price, a percentage represented in decimal form
+               default = 0.60.  
+        mf:    the "money factor" of the lease, essentially a finance charge
+               default = 0.001.  
+        tax:   the local sales tax rate as a decimal
+               default = 0.095.
+OUTPUT: The monthly lease payment on a new car.
+
+capitalized cost        <- sale price of the car - down payment
+residual value          <- manufacturer's suggested retail price * residual percentage
+monthly depreciation    <- difference of capitalized cost and residual value then 
+                           divided by the number of months
+monthly finance charge  <- capitalized cost plus residual value then multiplied
+                           by the money factor
+sub-total               <- monthly depreciation + monthly finance charge
+total                   <- sub-total plus taxes
+RETURN total
+```
+
+### (a)
+
+Based on the above pseudocode, write a function called `lease_calc()` to calculate the monthly lease payment on a new car.
+
+```{r, echo = FALSE}
+lease_calc <- function(msrp, price, down, n = 36, res = 0.60, mf = 0.001, tax = 0.095) {
+  cap_cost <- price - down
+  r_value <- msrp * res
+  dep <- (cap_cost - r_value) / n
+  fin <- (cap_cost + r_value) * mf
+  (dep + fin) * (1 + tax)
+}
+```
+
+### (b)
+
+Use your `lease_calc()` function from (a) to calculate the monthly lease payment on a car with an MSRP of \$31,495 sold for \$29,895, with a \$2,500 down payment, over 36 months, with a residual percentage of 52\%, at a money factor of 0.0016, in Los Angeles where the local sales tax is 9.5\%.
+
+```{r, include = FALSE, echo = FALSE}
+lease_calc(31495, 29895, 2500, 36, 0.52, 0.0016, 0.095)
+```
+
+
+\newpage
+
+## Question 7
+
+The objective of this question is to give practice with breaking up a problem into steps and encapsulating the algorithm into a function.
+
+For this question, we will refer to U.S. coins of denominations 1, 5, 10, and 25 cents, respectively called pennies, nickels, dimes, and quarters.
+
+### (a)
+
+Without using R, what is the minimum number of coins required to equal 47 cents? Explain your reasoning.
+
+*Hint*: For example, using 47 pennies would take 47 coins. Using 9 nickels and 2 pennies would take 11 coins. How would you find the minimum number of coins needed?
+
+
+### (b)
+
+We want to formalize and generalize the logic you used in (a). For an arbitrary number of cents, outline or describe the steps you would take to find the minimum number of coins required to equal that number of cents.
+
+*Hint*: This is meant to be done without R, but you will want to be clear so that you can translate it relatively easily into R code in (c).
+
+### (c)
+
+Using your outline from (b), write a function called `get_minimum_coins()` which inputs a positive (whole) number of cents (call the argument `cents`) and outputs the minimum number of coins required to equal that number of cents.
+
+*Hint*: Consider what mathematical operators we have introduced in Chapter 1 that may be helpful here.
+
+```{r, echo = FALSE}
+make_change <- function(x, coin) {
+  x["coins"] <- x["coins"] + x["cents"] %/% coin
+  x["cents"] <- x["cents"] %% coin
+  x
+}
+
+get_minimum_coins <- function(cents) {
+  x <- c(coins = 0, cents = cents)
+  x <- make_change(x, 25)
+  x <- make_change(x, 10)
+  x <- make_change(x, 5)
+  x <- make_change(x, 1)
+  x["coins"]
+}
+
+get_minimum_coins <- function(cents) {
+  coins <- 0
+  coins <- coins + cents %/% 25
+  cents <- cents %% 25
+  coins <- coins + cents %/% 10
+  cents <- cents %% 10
+  coins <- coins + cents %/% 5
+  cents <- cents %% 5
+  coins <- coins + cents %/% 1
+  cents <- cents %% 1
+  coins
+}
+```
+
+### (d)
+
+Test your `get_minimum_coins()` function from (c) with the following inputs:  
+
+(i) 21 cents (Answer: `r get_minimum_coins(21)` coins)  
+(ii) 38 cents (Answer: `r get_minimum_coins(38)` coins)  
+(iii) 119 cents (Answer: `r get_minimum_coins(119)` coins)  
+
+### (e)
+
+Use and explain your reasoning to find the number of cents less than 100 which requires the most coins. Verify your answer with your `get_minimum_coins()` function from (c).
+
+
+\newpage
+
+## Question 8
+
+The objective of this question is to help you learn about the scope of global and local objects, the logic of functions, and the concept of masking.
+
+**Note**: If you collaborate with others on this question, please use extra caution not to give away the answer so that everyone has an opportunity to think deeply about this question. *This is meant to be a more challenging/conceptual question, so do not be discouraged if you do not fully solve this question right away.*
+
+Consider the following code:
+
+```{r}
+x <- 3
+y <- 4
+
+exp1 <- function() {
+  x^y
+}
+
+exp2 <- function(x = 2) {
+  x^y
+}
+
+exp_y <- function(x) {
+  function(y) {
+    x^y
+  }
+}
+```
+
+
+### (a)
+
+Why does the command `exp1()` give a different answer than `exp2()`?
+
+
+### (b)
+
+Why does the command `exp_y()` *not* throw an error? Explain in detail what is happening.
+
+*Hint*: Does `exp_y()` output a numeric value? What does it output?
+
+
+### (c)
+
+Without redefining the global objects `x` or `y`, changing the definition of the `exp_y()` function, or creating any new objects, use the `exp_y()` function to calculate the fifteenth power of three.
