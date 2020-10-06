@@ -31,9 +31,7 @@ In a nested list, recount your UCLA class history to date (sorry seniors!), e.g.
 
 Find a picture of a kitten (not this one) and include it in your document. Be sure to cite your source.
 
-![](images/kitten2.jpg){width=35%}
-
-Sample kitten from: https://www.facebook.com/kittenxlady/posts/2190511374536140
+<!-- Place the R Markdown code to include the image below -->
 
 
 ### Question 2
@@ -171,7 +169,7 @@ z &= \frac{\hat{p} - p_0}{\sqrt{\dfrac{p_0\left(1 - p_0\right)}{n}}},
 \end{align*}
 where $\hat{p}$ denotes the sample proportion. How is $\hat{p}$ related to the input arguments?
 
-```{r, echo = FALSE}
+```{r}
 
 ```
 
@@ -238,7 +236,7 @@ RETURN total
 
 Based on the above pseudocode, write a function called `lease_calc()` to calculate the monthly lease payment on a new car.
 
-```{r, echo = FALSE}
+```{r}
 
 ```
 
