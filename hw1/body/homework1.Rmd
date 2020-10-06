@@ -31,7 +31,7 @@ In a nested list, recount your UCLA class history to date (sorry seniors!), e.g.
 
 Find a picture of a kitten (not this one) and include it in your document. Be sure to cite your source.
 
-![](images/kitten2.jpg){width=35%}
+![](kitten2.jpg){width=35%}
 
 Sample kitten from: https://www.facebook.com/kittenxlady/posts/2190511374536140
 
