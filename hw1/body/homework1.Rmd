@@ -50,7 +50,7 @@ If you have not yet taken classes at UCLA (other than this one), include your mo
 
 Find a picture of a kitten (not this one) and include it in your document. Be sure to cite your source.
 
-![](images/){width=35%}
+![](images/kitten2.jpg){width=35%}
 
 <!-- \begin{center} -->
 <!-- \includegraphics[width=0.35\textwidth]{kitten2.jpg} -->
