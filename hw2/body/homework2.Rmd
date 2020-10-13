@@ -308,6 +308,3 @@ Verify that your `insert_at()` function works by executing the following command
 # insert_at(1:5, c(0, 0, 0), at = 6)
 ```
 
-```{r, error = TRUE, echo = FALSE, eval = FALSE}
-insert_at(1:5, c(0, 0, 0), at = 7)
-```
