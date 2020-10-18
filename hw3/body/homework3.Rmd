@@ -1,0 +1,413 @@
+---
+title: Homework 3
+author: "Stats 20 Lec 1 and 2"
+date: "Fall 2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = "")
+```
+
+
+## Basic Questions
+### Question 1
+
+The objective of this question is to give practice with logical indexing.
+
+Suppose Andy Dwyer tracks his commute time to his women's studies class for ten days and records the following times (in minutes):
+\begin{center}
+14 12 20 15 19 20 28 20 18 20
+\end{center}
+
+#### (a)
+
+Store Andy's commute times as a vector in your workspace called `commute_times`. Use a logical index to determine which days Andy had a commute time that was more than one standard deviation away (longer or shorter) from the average (mean) commute time? What were those commute times?
+
+*Hint*: In addition to the lecture notes, you may use the `abs()` function, if necessary. The `abs()` function computes the absolute value of the elements of a numeric vector.
+
+#### (b)
+
+Using the same logical index from (a), determine which days Andy had a commute time that was within one standard deviation (longer or shorter) of the mean commute time? What were those commute times?
+
+#### (c)
+
+Using the same logical index from (a), what proportion of days did Andy have a commute time that was within one standard deviation of the mean commute time?
+
+*Hint*: Can arithmetic operators/functions for numeric vectors work for logical vectors? What do `sum()` and `mean()` compute for logical vectors?
+
+
+### Question 2
+
+The objective of this question is to help further your understanding of Boolean operators and what `NA` represents.
+
+Logical vectors in R can contain `NA` in addition to `TRUE` and `FALSE`. An `NA` in a logical context can be interpreted as "unknown." Consider the following commands:
+
+```{r}
+NA & TRUE
+NA & FALSE
+NA | TRUE
+NA | FALSE
+```
+
+Explain why there is a difference in the output of these four commands. Why are they not all `NA`?
+
+*Hint*: Does the output rely on knowing what the unknown value `NA` represents?
+
+
+### Question 3
+
+The objective of this question is to review the concept of vectorization and practice using logical expressions.
+
+**Note: You may not use a loop for this question.**
+
+Recall the `get_minimum_coins()` function from Homework 1 Question 7(c), which inputs a positive (whole) number of cents (call the argument `cents`) and outputs the minimum number of coins required to equal that number of cents.
+
+#### (a)
+
+Is the `get_minimum_coins()` function (as you wrote it in Homework 1) vectorized? Why or why not?
+
+#### (b)
+
+In Homework 1 Question 7(e), you used reasoning to explain that the numbers of cents less than 100 which require the most coins are 94 and 99. With a single command (i.e., one line of code), verify your answer with your `get_minimum_coins()` function.
+
+*Hint 1*: The output of your single command should be a vector with the two values 94 and 99. You should not display/print the results for every number of cents less than 100.
+
+*Hint 2*: If the single command is too challenging to come up with all at once, first find a solution using several commands, then condense the operations into a single line.
+
+
+### Question 4
+
+The objective of this question is to give practice with writing a function using a `for` loop and an `if` statement, as well as to help your understanding of how to deal with `NA` values.
+
+#### (a)
+
+Write a function called `my_min()` that computes the minimum of a vector without the `min()`, `max()`, `range()`, `fivenum()`, `summary()`, or `sort()` functions. Include an optional logical argument called `na.rm` that specifies whether to remove `NA`s. The output of `my_min(x)` and `min()` should be identical for any numeric vector `x`.
+
+*Hint*: Optional arguments (in general) have default values so that they do not need to be specified by the user. What should be the default value of the `na.rm` argument? That is, should the default behavior be to remove `NA`s or keep them?
+
+```{r}
+my_min <- function(x, na.rm = FALSE) {
+  
+}
+```
+
+#### (b)
+
+Test your `my_min()` function from (a) with the following inputs:  
+
+(i) `c(4, 1, 0, 2, -3, -5, -4)`
+
+```{r}
+
+```
+
+(ii) `c("bears", "beets", "Battlestar Galactica")`
+
+```{r}
+
+```
+
+(iii) `7`
+
+```{r}
+
+```
+
+(iv) `c("Pawnee", "rules", "Eagleton", NA)`, with `na.rm = TRUE` and `na.rm = FALSE`
+
+```{r}
+
+```
+
+(v) `NA`, with `na.rm = TRUE` and `na.rm = FALSE`
+
+```{r}
+
+```
+
+### Question 5
+
+The objective of this question is to give practice with `while()` loops and writing cleaner code.
+
+Consider the `while()` loop below that computes all Fibonacci numbers less than 500.
+
+```{r}
+fib1 <- 1
+fib2 <- 1
+full_fib <- c(fib1, fib2)
+while (fib1 + fib2 < 500) {
+  old_fib2 <- fib2
+  fib2 <- fib1 + fib2
+  full_fib <- c(full_fib, fib2)
+  fib1 <- old_fib2
+}
+full_fib
+```
+
+#### (a)
+
+The variable `old_fib2` is not actually necessary. Rewrite the `while()` loop with the update of `fib1` based on just the current values of `fib1` and `fib2`.
+
+```{r}
+
+```
+
+#### (b)
+
+In fact, `fib1` and `fib2` are not necessary either. Rewrite the `while()` loop without using *any* variables except `full_fib`.
+
+```{r}
+
+```
+
+#### (c)
+
+Determine the number of Fibonacci numbers less than 1,000,000,000 = $10^9$.
+
+```{r}
+
+```
+
+
+
+
+## Intermediate Questions
+
+### Question 6
+
+The objective of this question is to introduce and give practice with the expanded order of operations.
+
+Recall the standard PEMDAS order of operations:
+
+* Parentheses `()`
+
+* Exponents `^`
+
+* Multiplication and Division `*`, `/`
+
+* Addition and Subtraction `+`, `-`
+
+We have now learned several additional operations in R to consider. The combined order of operations is:
+
+* Parentheses `()`
+
+* Exponents `^`
+
+* Unary operators `-`, `+` (changing the sign of a number, e.g. `-1`)
+
+* Colon operator `:` (making a regular sequence)
+
+* Infix operators of the form `%xyz%` (e.g., mod `%%`, integer division `%/%`, or matrix multiplication `%*%`)
+
+* Multiplication and Division `*`, `/`
+
+* Addition and subtraction `+`, `-`
+
+* Relational operators `>`, `>=`, `<`, `<=`, `==`, `!=`
+
+* Logical negation `!`
+
+* Logical AND `&`, `&&`
+
+* Logical OR `|`, `||`
+
+* Assignment operator `<-`
+
+Use only parentheses, the order of operations, and coercion rules (i.e., the mode hierarchy) to change the following line of code so that the `jerry` object will contain the numeric vector `c(2, 1)`, and the statement should not produce a warning. You may not use type casting functions for this question.
+
+```{r}
+jerry <- 2:8 * 5 %% 3^-2:7 > 2
+jerry
+```
+
+*Hint 1*: First use parentheses to understand what is the order of operations as written, then consider what computations/coercions need to occur to get a numeric vector of length 2.
+
+*Hint 2*: A minimal/ideal solution contains no more than three sets of parentheses.
+
+### Question 7
+
+The objective of this question is to introduce the `ifelse()` function and give practice with vectorization.
+
+#### (a)
+
+Write a function called `my_ifelse()` that implements a vector form of the if-else statement without the `ifelse()` function. That is, the `i`th element of `my_ifelse(test, yes, no)` will be `yes[i]` if `test[i]` is `TRUE` and `no[i]` if `test[i]` is `FALSE`. Values of `yes` or `no` should be recycled if either is shorter than `test`.
+
+*Hint*: This can be written as a loop, but a vectorized solution is better.
+
+```{r}
+
+```
+
+#### (b)
+
+Verify that your `my_ifelse()` function works by executing the following commands:
+
+```
+x <- (1:10) * pi
+my_ifelse(x %% 1 >= 0.5, x %/% 1 + 1, x %/% 1)
+```
+
+```{r}
+
+```
+
+#### (c)
+
+Use your `my_ifelse()` function to write `my_abs()` and `my_sign()` functions that, respectively, compute the absolute values and signs of the elements of a numeric vector. The respective outputs of `my_abs(x)` and `my_sign()` should be identical to `abs(x)` and `sign(x)` for any numeric vector `x`.
+
+*Hint*: It may be helpful to use `my_abs()` when writing `my_sign()`.
+
+```{r}
+
+```
+
+### Question 8
+
+The objective of this question is to introduce the concept of recursion, as well as give further practice with flow control statements and following instructions given in pseudocode.
+
+There are many ways to sort a vector. In this problem, you will implement one of the more interesting: the **merge sort**.
+
+Merge sort is an example of a **"divide and conquer"** algorithm, which means it solves the problem it is working on by breaking it up into smaller and smaller pieces so that by the time the smaller problems are solved, the larger problem will seem to have magically resolved itself. It is also interesting because it is an example of a ***recursive*** algorithm, which means it calls itself (generating Fibonacci numbers is another example of a recursive algorithm).
+
+One way to think of a merge sort is like this: Suppose you were responsible for sorting a stack of papers. You could just sort them all yourself, but who has time for that? So, you find two friends who owe you a favor and you split the stack of papers in half, giving one half to each of your friends and tell them to sort their stacks. Your plan is to simply "merge" their two sorted stacks together after they give them back to you by repeatedly looking at the first paper on each stack and putting the appropriate one of those two stacks next in a new stack, until only that stack remains. The magic part comes in when each of your friends does the same thing, splitting their stacks in half and each giving those smaller stacks to two other friends, and so on. If anyone gets a stack of length 1 or 0 papers, they simply hand it back up the chain.
+
+Here is an example:
+
+```
+Level 1: You
+         Dasul, Chengyi, Bianca, Hyunjee, Giorgia, Filippo, Eva, Albert
+Level 2: You split the vector in two and give it to two others
+         Dasul, Chengyi, Bianca, Hyunjee             Giorgia, Filippo, Eva, Albert
+Level 3: They each split their vectors in two and give them two two others each
+         Dasul, Chengyi        Bianca, Hyunjee       Giorgia, Filippo      Eva, Albert
+Level 4: Each of them split their vectors again and give them to two others
+         Dasul      Chengyi    Bianca     Hyunjee    Giorgia    Filippo    Eva        Albert
+```
+Everybody at level 4 was given a stack of just one paper, so they have already "sorted" their stack and they have them back up the chain:
+```
+Level 3: Get back:
+         Dasul & Chengyi       Bianca & Hyunjee      Giorgia & Filippo     Eva & Albert
+         Merge to and pass up:
+         Chenyi, Dasul         Bianca, Hyunjee       Filippo, Giorgia      Albert, Eva
+Level 2: Get back:
+         Chenyi, Dasul  &  Bianca, Hyunjee           Filippo, Giorgia  &  Albert, Eva
+         Merge to and pass up:
+         Bianca, Chenyi, Dasul, Hyunjee              Albert, Eva, Filippo, Giorgia
+Level 1: Get back:
+         Bianca, Chenyi, Dasul, Hyunjee   &   Albert, Eva, Filippo, Giorgia
+         Merge to and pass up:
+         Albert, Bianca, Chenyi, Dasul, Eva, Filippo, Giorgia, Hyunjee
+```
+
+All any one person in the system needs to do is: Take the stack they are given. If the stack is length 1 or zero, immediately return it to the person who gave it to them, otherwise split their stack of papers in two and give each half to someone else to sort. When they get back the two sorted halves, merge them into one sorted stack and pass that back.
+
+
+
+#### (a)
+
+Read through the following pseudocode:
+
+```
+FUNCTION: merge()
+INPUTS: left, right, two sorted numeric vectors
+OUTPUT: A single combined sorted vector
+
+merged <- numeric vector of length 0.
+WHILE length of left > 0
+    IF length right > 0
+        IF the first element of left < the first element of right
+            merged <- combination of merged and the first element of left
+            remove the first element of left
+        ELSE
+            merged <- combination of merged and the first element of right
+            remove the first element of right
+    ELSE
+        merged <- combination of merged and left
+        remove all the elements of left
+RETURN combination of merged and right
+
+
+FUNCTION: merge_sort()
+INPUTS:   x, a numeric vector
+OUTPUT:   A vector containing the elements of x, sorted from smallest to largest.
+
+IF length x > 1
+    split x roughly into half, as two vectors named left and right
+    sorted_left <- left sorted by merge_sort()
+    sorted_right <- right sorted by merge_sort()
+    x <- merge sorted_left and sorted_right with the merge() function
+RETURN x
+```
+
+
+
+Using the provided pseudocode, write the `merge()` and `merge_sort()` functions.
+
+
+```{r}
+merge <- function(left, right) {
+  
+}
+
+merge_sort <- function(x) {
+  
+}
+
+```
+
+#### (b)
+
+Test your `merge_sort()` function on the following vectors:
+
+(i) `numeric(0)`
+(ii) `7`
+(iii) `10:1`
+
+## Advanced Questions
+
+### Question 9
+
+Download the `dna.RData` file from CCLE and save it to your working directory (**Note:** If you are doing this as a homework project, the `dna.RData` file should already be downloaded for you in the `data` subdirectory). Then run the following command to load the objects `dna1` and `dna2` in your workspace:
+
+```{r}
+load("data/dna.RData")
+```
+
+The `dna1` and `dna2` vectors represent  nucleotide sequences of DNA (deoxyribonucleic acid). The letters `A`, `C`, `G`, and `T` respectively represent the four nucleotide bases of a DNA strand: adenine, cytosine, guanine, and thymine.
+
+**Note**: Do *not* print the entire `dna1` and `dna2` objects. It is *extremely* bad practice/style to output an entire object with more than about 100 values in a vector.
+
+#### (a)
+
+Write a function called `locate_motif()` with two character vector arguments `strand` and `motif` that returns the index of the start of the `motif` sequence located in the `strand` vector. If the motif is not found, the `locate_motif()` function should return `integer(0)`.
+
+Use your `locate_motif()` function to find the sequence `c("G", "A", "T", "T", "A", "C", "A")` in the `dna1` vector.
+
+```{r}
+
+```
+
+#### (b)
+
+Consider the following two DNA sequences:
+
+```{r}
+seq1 <- c("A", "C", "A", "G", "T")
+seq2 <- c("T", "A", "G", "T", "A")
+```
+
+A substring is a subset of contiguous values in a sequence. The longest shared substring between `seq1` and `seq2` is `"A", "G", "T"`, starting at index 3 in `seq1` and starting at index 2 in `seq2`.
+
+Using your `locate_motif()` function from (a), write a function called `extract_longest_substring()` with two character vector arguments `strand1` and `strand2` that returns the longest shared substring. If there is no shared substring, the `extract_longest_substring()` function should return `character(0)`.
+
+```{r}
+
+```
+
+Use your `extract_longest_substring()` function to find the longest shared substring for the vectors `dna1` and `dna2`.
+
+```{r}
+
+```
+
